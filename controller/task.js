@@ -6,7 +6,7 @@ require("dotenv").config()
 const Tasks = require("../model/task")
 
 try {
-    mongoose.connect("mongodb+srv://Muanyachi:Muanyachi50@task.buirj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    mongoose.connect(process.env.MONGO_URI)
     console.log("Connection Successful")
 } catch (error) {
     if(error) throw error
