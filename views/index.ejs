@@ -20,9 +20,16 @@
             </form>
 
             <div class="tasks">
-                 <% if(tasks) { %>
+                
+
+                <% if(tasks) { %>
                         <% tasks.map((task) => { %>
-                            <div>
+                            
+                            <% if(task.completed) { %>
+                                <input type="checkbox" name="completed" <%= task.completed === true ? "checked" : "" %> >
+                            <% } %>
+
+                            <div class="task">
                                 <%  if(task.completed) { %>
                                    <strike>
                                        <%= task.name %>
@@ -30,7 +37,7 @@
                                 <% } else { %>
                                     ``<%= task.name %>
                                 <% }  %>
-                                 <a type="button" href="/api/getTask/<%= task._id %>"> Edit </a>
+                                 <a type="button" href="/api/getTask/<%= task._id %>"> Update </a>
                                 <form action="/api/deleteTask/<%= task._id %>?_method=DELETE" method="POST">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>

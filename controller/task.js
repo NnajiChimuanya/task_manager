@@ -60,6 +60,10 @@ Router.patch("/api/updateTask/:id", (req, res) => {
     })
 })
 
+Router.post("/click", (req, res) => {
+    console.log("checked")
+})
+
 
 
 
