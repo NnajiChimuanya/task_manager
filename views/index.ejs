@@ -23,7 +23,14 @@
                  <% if(tasks) { %>
                         <% tasks.map((task) => { %>
                             <div>
-                                <%= task.name %> <a type="button" href="/api/getTask/<%= task._id %>"> Edit </a>
+                                <%  if(task.completed) { %>
+                                   <strike>
+                                       <%= task.name %>
+                                   </strike>
+                                <% } else { %>
+                                    ``<%= task.name %>
+                                <% }  %>
+                                 <a type="button" href="/api/getTask/<%= task._id %>"> Edit </a>
                                 <form action="/api/deleteTask/<%= task._id %>?_method=DELETE" method="POST">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
