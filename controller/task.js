@@ -32,6 +32,36 @@ Router.post("/api/addTask", async (req, res, next) => {
 
 })
 
+Router.get("/api/getTask/:id", (req, res) => {
+    Tasks.findById({_id : req.params.id}, (err, data) => {
+        if(err) throw err
+        res.render("task", {task : data})
+    })
+})
+
+Router.delete("/api/deleteTask/:id", (req, res) => {
+    Tasks.findByIdAndDelete({_id : req.params.id}, (err) => {
+        if(err) throw err
+        console.log(`deleted ${req.params.id}`)
+         res.redirect("/")
+    })
+   
+})
+
+Router.patch("/api/updateTask/:id", (req, res) => {
+    let mm = false
+    if(req.body.completed) {
+         mm = true
+    }
+    Tasks.findByIdAndUpdate({_id : req.params.id},{name : req.body.name, completed : mm}, (err, data) => {
+        if(err) throw err
+        console.log(`Succeffuly update ${req.params.id}`)
+        res.redirect("/")
+    })
+})
+
+
+
 
 
 module.exports = Router
